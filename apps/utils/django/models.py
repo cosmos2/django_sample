@@ -6,4 +6,5 @@ __all__ = ("DefaultModel",)
 
 
 class DefaultModel(SafeDeleteModel, TimeStampedModel):
-    pass
+    class Meta:
+        abstract = True
