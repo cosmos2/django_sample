@@ -31,3 +31,33 @@ class LetterSerializer(serializers.ModelSerializer):
             "content",
             "author",
         )
+
+
+class LetterCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Letter
+        fields = "__all__"
+
+    def validate(self, data):
+        if content := data.get("content"):
+            if not content.strip():
+                raise ValueError("content should be something")
+        return data
+
+    def to_representation(self, instance):
+        return LetterSerializer(instance).data
+
+
+class LetterUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Letter
+        fields = "__all__"
+
+    def validate(self, data):
+        if content := data.get("content"):
+            if not content.strip():
+                raise ValueError("content should be something")
+        return data
+
+    def to_representation(self, instance):
+        return LetterSerializer(instance).data

@@ -1,5 +1,4 @@
-from rest_framework import mixins, status
-from rest_framework.response import Response
+from rest_framework import mixins
 from rest_framework.viewsets import GenericViewSet as DefaultGenericViewSet
 
 __all__ = (
@@ -40,25 +39,6 @@ class ViewSetMixin(GetSerializerClassMixin):
         return super().get_serializer(*args, **kwargs)
 
 
-class DestroyModelMixin(mixins.DestroyModelMixin):
-    def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-
-        try:
-            serializer = self.get_serializer(instance, data=request.data)
-            serializer.is_valid(raise_exception=True)
-            self.perform_destroy(instance, serializer)
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except AssertionError:
-            return super().destroy(request, *args, **kwargs)
-
-    def perform_destroy(self, instance, serializer=None):
-        if serializer:
-            serializer.save()
-        else:
-            return super().perform_destroy(instance)
-
-
 class ListModelViewSet(ViewSetMixin, mixins.ListModelMixin, DefaultGenericViewSet):
     pass
 
@@ -92,7 +72,7 @@ class RetrieveUpdateDestroyModelViewSet(
     ViewSetMixin,
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
-    DestroyModelMixin,
+    mixins.DestroyModelMixin,
     DefaultGenericViewSet,
 ):
     pass
@@ -112,7 +92,7 @@ class ModelViewSet(
     mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
-    DestroyModelMixin,
+    mixins.DestroyModelMixin,
     mixins.ListModelMixin,
     DefaultGenericViewSet,
 ):
