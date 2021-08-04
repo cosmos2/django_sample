@@ -51,6 +51,7 @@ LOCAL_APPS = [
     "users",
     "bookmarks",
     "letters",
+    "utils",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -135,3 +136,5 @@ STATIC_URL = "/static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
+
+APPEND_SLASH = True
