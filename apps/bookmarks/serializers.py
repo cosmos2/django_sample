@@ -42,3 +42,33 @@ class BookmarkSerializer(serializers.ModelSerializer):
             "author",
             "tags",
         )
+
+
+class BookmarkCreateSerializer(serializers.ModelSerializer):
+    tags = _TagSerializer(many=True, required=False)
+
+    class Meta:
+        model = Bookmark
+        fields = (
+            "url",
+            "author",
+            "tags",
+        )
+
+    def to_representation(self, instance):
+        return BookmarkSerializer(instance).data
+
+
+class BookmarkUpdateSerializer(serializers.ModelSerializer):
+    tags = _TagSerializer(many=True, required=False)
+
+    class Meta:
+        model = Bookmark
+        fields = (
+            "url",
+            "author",
+            "tags",
+        )
+
+    def to_representation(self, instance):
+        return BookmarkSerializer(instance).data

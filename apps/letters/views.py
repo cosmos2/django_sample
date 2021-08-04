@@ -9,9 +9,9 @@ class LetterViewSet(ModelViewSet):
     queryset = Letter.objects.all()
     serializer_classes = {
         "list": LetterSerializer,
-        "retreive": LetterSerializer,
+        "retrieve": LetterSerializer,
         "create": LetterCreateSerializer,
-        "LetterUpdateSerializer": LetterUpdateSerializer,
+        "update": LetterUpdateSerializer,
     }
     permission_classes = [IsAdminUser]
 

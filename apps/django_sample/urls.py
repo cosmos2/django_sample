@@ -22,5 +22,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("users/", include("users.urls")),
     path("letters/", include("letters.urls")),
+    path("bookmarks/", include("bookmarks.urls")),
     re_path(r"^docs/$", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
 ]
