@@ -42,8 +42,12 @@ class _LetterSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.SerializerMethodField(help_text="아이디 앞 1 자리 제외하고 * 표시")
-    bookmark_set = _BookmarkSerializer(many=True, source="bookmark_set")
-    letter_set = _LetterSerializer(many=True, source="letter_set")
+    bookmark_set = _BookmarkSerializer(
+        many=True,
+    )
+    letter_set = _LetterSerializer(
+        many=True,
+    )
 
     class Meta:
         model = User

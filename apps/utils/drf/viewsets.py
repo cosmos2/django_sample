@@ -1,4 +1,3 @@
-from drf_yasg.utils import swagger_auto_schema
 from rest_framework import mixins, status
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet as DefaultGenericViewSet
@@ -26,8 +25,6 @@ class GetSerializerClassMixin:
             method = getattr(getattr(self, "request"), "method")
 
             if action:
-                # if action == "partial_update":
-                #     action = "update"
                 return self.serializer_classes[action]
             if method:
                 return self.serializer_classes[self.request.method]
@@ -37,10 +34,6 @@ class GetSerializerClassMixin:
 
 
 class ViewSetMixin(GetSerializerClassMixin):
-    # @swagger_auto_schema(auto_schema=None)
-    # def update(self, request, *args, **kwargs):
-    #     return super().update(request, *args, **kwargs)
-
     def get_serializer(self, *args, **kwargs):
         if "data" in kwargs and isinstance(kwargs["data"], list):
             kwargs.setdefault("many", True)
