@@ -1,7 +1,8 @@
+from rest_framework.permissions import IsAuthenticated
+
 from users.models import User
 from users.serializers import UserSerializer
 from utils.drf.viewsets import ReadOnlyModelViewSet
-from rest_framework.permissions import AllowAny
 
 
 class UserViewSet(ReadOnlyModelViewSet):
@@ -9,4 +10,4 @@ class UserViewSet(ReadOnlyModelViewSet):
 
     serializer_classes = {"list": UserSerializer}
 
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
