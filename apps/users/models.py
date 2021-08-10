@@ -27,7 +27,7 @@ class UserManager(BaseUserManager):
 
 class User(DefaultModel, PermissionsMixin, AbstractBaseUser):
     nickname = models.CharField("닉네임", max_length=64, blank=False, null=False)
-    email = models.EmailField("이메일", max_length=256, unique=True, blank=True, null=True)
+    email = models.EmailField("이메일", max_length=256, unique=True)
 
     USERNAME_FIELD = "email"
 
